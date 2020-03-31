@@ -11,17 +11,25 @@
 import Stepan from '/src/lib/stepan.js';
 
 export default class TodoItem extends Stepan.Component {
-  render({isDone, title}) { // render will always accept data to render
+  render({ isDone, title }) { // render will always accept data to render
     const rootElement = Stepan.createElement('li', this.parent, { class: isDone && 'completed' });
     const todoViewContainer = Stepan.createElement('div', rootElement, { class: 'view' });
 
-    // TODO: Input must be checked if todo item is done
-    Stepan.createElement('input', todoViewContainer, {class: "toggle", type: "checkbox"});
+    try {
+      for (let elem of this.parent.querySelectorAll(".completed").values())
+        if (elem.getElementsByTagName("label")[0] != undefined && elem.getElementsByTagName("label")[0].innerText == title)
+          throw new Error("Task with such name is already done");
 
-    Stepan.createElement('label', todoViewContainer, {innerText: title});
-    Stepan.createElement('button', todoViewContainer, {class: "destroy"});
-    Stepan.createElement('input', todoViewContainer, { class: "edit", value: title });
+      Stepan.createElement('input', todoViewContainer, { class: "toggle", type: "checkbox" });
+      Stepan.createElement('label', todoViewContainer, { innerText: title });
+      Stepan.createElement('button', todoViewContainer, { class: "destroy" });
+      Stepan.createElement('input', todoViewContainer, { class: "edit", value: title });
 
-    return rootElement
+      return rootElement
+
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 }

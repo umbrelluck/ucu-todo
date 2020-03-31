@@ -10,6 +10,7 @@ import { Footer } from './components/footer/index.js';
 
 const todos = [
   {isDone: true, title: '(Done) Todo 1'},
+  { isDone: true, title: '(Done) Todo 1' },
   {isDone: false, title: 'Todo 2'}
 ];
 
