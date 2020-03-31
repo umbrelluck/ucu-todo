@@ -29,9 +29,9 @@ export default class Stepan {
     constructor(parent) {
       if (!(parent instanceof HTMLElement))
         throw new StepanError("Invalid DOM element");
-      if (parent == null)
+      else if (parent == null)
         throw new StepanError(`Parent is ${parent}`);
-      this.parent = parent;
+      else this.parent = parent;
     }
 
     // TODO (Bonus): Ensure that every component returns a top-level root element
